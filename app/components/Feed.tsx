@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Stories } from "./Stories";
 import { Posts } from "./Posts";
 import { MiniProfile } from "./MiniProfile";
+import { Suggestions } from "./Suggestions";
 interface IFeedProps {}
 
 export const Feed: FC<IFeedProps> = (props) => {
@@ -19,6 +20,7 @@ export const Feed: FC<IFeedProps> = (props) => {
           {/* Mini Profile */}
           <MiniProfile />
           {/* Suggestions */}
+          <Suggestions />
         </div>
       </section>
     </main>
