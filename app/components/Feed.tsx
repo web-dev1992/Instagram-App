@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Stories } from "./Stories";
 import { Posts } from "./Posts";
+import { MiniProfile } from "./MiniProfile";
 interface IFeedProps {}
 
 export const Feed: FC<IFeedProps> = (props) => {
@@ -11,12 +12,14 @@ export const Feed: FC<IFeedProps> = (props) => {
         <Stories />
 
         {/* Posts section */}
-        <Posts/>
+        <Posts />
       </section>
       <section className="md:col-span-1 hidden md:inline-grid">
-        {/* Mini Profile */}
-
-        {/* Suggestions */}
+        <div className="fixed w-[380px]  ">
+          {/* Mini Profile */}
+          <MiniProfile />
+          {/* Suggestions */}
+        </div>
       </section>
     </main>
   );
