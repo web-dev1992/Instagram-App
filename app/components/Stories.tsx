@@ -21,7 +21,7 @@ export const Stories: FC<IStoriesProps> = (props) => {
       id: i,
     }));
     setStoryUsers(storyUsers);
-    console.log(storyUsers);
+    
   }, []);
   return (
     <div className="flex space-x-2 p-6 bg-white mt-8 border border-gray-200 overflow-x-scroll rounded-sm scrollbar-w-0 scrollbar-none">
