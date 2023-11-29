@@ -8,11 +8,14 @@ import {
 } from "@heroicons/react/24/outline";
 import { HomeIcon } from "@heroicons/react/24/solid";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { useRecoilState } from "recoil";
+import { modalState } from "@/atom/modalAtom";
 interface IHeaderProps {}
 
 export const Header: FC<IHeaderProps> = (props) => {
   const { data: session } = useSession();
   console.log("session====>",session);
+  const [open, setOpen]=useRecoilState(modalState);
   return (
     <div className="bg-white sticky border-b shadow-sm z-30 top-0">
       <div className="flex content-center items-center justify-between max-w-6xl mx-4 xl:m-auto ">
@@ -52,7 +55,8 @@ export const Header: FC<IHeaderProps> = (props) => {
           {session ? (
             <>
               {" "}
-              <PlusCircleIcon className="h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
+              <PlusCircleIcon  onClick={()=>setOpen(true)}
+              className="h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
               <Image
                 onClick={() => signOut()}
                 src={session?.user?.image ?? ""}
