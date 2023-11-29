@@ -1,3 +1,6 @@
+'use client';
+
+
 import { FC } from "react";
 import Image from "next/image";
 import {
@@ -5,10 +8,11 @@ import {
   PlusCircleIcon,
 } from "@heroicons/react/24/outline";
 import { HomeIcon } from "@heroicons/react/24/solid";
-
+import { useSession, signIn, signOut } from "next-auth/react";
 interface IHeaderProps {}
 
 export const Header: FC<IHeaderProps> = (props) => {
+  const { data: session } = useSession();
   return (
     <div className="bg-white sticky border-b shadow-sm z-30 top-0">
       <div className="flex content-center items-center justify-between max-w-6xl mx-4 xl:m-auto ">
@@ -44,13 +48,21 @@ export const Header: FC<IHeaderProps> = (props) => {
         </div>
         {/* right part */}
         <div className="flex space-x-4 items-center ">
-          <HomeIcon className="hidden md:inline-flex h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
-          <PlusCircleIcon className="h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
-          <img
-            src="/images/taraneh.jpg"
-            alt="user-image"
-            className="h-10 rounded-full cursor-pointer "
-          />
+          {session ? (
+            <>
+              {" "}
+              <HomeIcon className="hidden md:inline-flex h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
+              <PlusCircleIcon className="h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
+              <Image
+                onClick={() => signOut}
+                src={session?.user?.image ?? ""}
+                alt="user-image"
+                className="h-10 rounded-full cursor-pointer "
+              />
+            </>
+          ) : (
+            <button onClick={() => signIn}>Sign in</button>
+          )}
         </div>
       </div>
     </div>

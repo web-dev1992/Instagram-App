@@ -21,13 +21,13 @@ export default async function Signin() {
             height={581}
             className="object-contain w-auto h-auto"
           />
-          <div className="absolute top-5 right-11 z-30">
+          <div className="absolute top-[18px] right-[46px] z-30">
             <Image
               src="/images/phone-slide-1.png"
               alt="login"
               width={210}
               height={538}
-              className="object-contain w-auto h-auto"
+              // className="object-contain w-auto h-auto"
             />
           </div>
         </div>
