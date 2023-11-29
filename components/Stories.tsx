@@ -1,6 +1,7 @@
 "use client";
 import minifaker from "minifaker";
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import "minifaker/locales/en";
 import { FC } from "react";
 import { Story } from "./Story";
@@ -13,7 +14,7 @@ interface userStory {
 }
 export const Stories: FC<IStoriesProps> = (props) => {
   const [storyUsers, setStoryUsers] = useState([]);
-
+  const { data: session } = useSession();
   useEffect(() => {
     const storyUsers = minifaker.array(20, (i: number) => ({
       username: minifaker.username({ locale: "en" }).toLowerCase(),
@@ -21,12 +22,24 @@ export const Stories: FC<IStoriesProps> = (props) => {
       id: i,
     }));
     setStoryUsers(storyUsers);
-    
   }, []);
   return (
     <div className="flex space-x-2 p-6 bg-white mt-8 border border-gray-200 overflow-x-scroll rounded-sm scrollbar-w-0 scrollbar-none">
+      {session && (
+        <Story
+          img={session?.user?.image ?? ""}
+          username={session.user?.username}
+          isUser={true}
+        />
+      )}
+
       {storyUsers.map((user: userStory) => (
-        <Story key={user.id} username={user.username} img={user.img} />
+        <Story
+          key={user.id}
+          username={user.username}
+          img={user.img}
+          isUser={false}
+        />
       ))}
     </div>
   );
