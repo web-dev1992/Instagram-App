@@ -1,5 +1,5 @@
-
-import { FC, useState } from "react";
+"use client";
+import { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import type { FormEvent } from "react";
@@ -10,7 +10,15 @@ import {
   BookmarkIcon,
   FaceSmileIcon,
 } from "@heroicons/react/24/outline";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import Moment from "react-moment";
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+} from "firebase/firestore";
 import { db, storage } from "@/firebase";
 interface IPostProps {
   id: number;
@@ -29,8 +37,19 @@ export const Post: FC<IPostProps> = ({
 }) => {
   const { data: session } = useSession();
   const [comment, setComment] = useState("");
+  const [comments, setComments] = useState<any>([]);
 
-  
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      query(
+        collection(db, "posts", "_id", "comments"),
+        orderBy("timestamp", "desc")
+      ),
+      (snapshot) => {
+        setComments(snapshot.docs);
+      }
+    );
+  }, []);
   async function sendComment(event: FormEvent) {
     event.preventDefault();
     const commentToSend = comment;
@@ -80,6 +99,27 @@ export const Post: FC<IPostProps> = ({
         <span className="font-bold mr-2 ">{username}</span>
         {caption}
       </p>
+      {comments.length > 0 && (
+        <div className="mx-10 max-h-24 overflow-y-scroll scrollbar-none">
+          {comments.map((comment) => (
+            <div
+              className="flex items-center space-x-2 mb-2"
+              key={comment.data()._id}
+            >
+              <Image
+                src={comment.data().userImage}
+                alt="user-image"
+                width={50}
+                height={50}
+                className="object-cover w-auto h-7 rounded-full"
+              />
+              <p className="fone-semibold ">{comment.data().username}</p>
+              <p className="flex-1 truncate">{comment.data().comment}</p>
+              <Moment fromNow>{comment.data().timestamp?.toDate()}</Moment>
+            </div>
+          ))}
+        </div>
+      )}
       {/* Post input box */}
       {session && (
         <form action="" className="flex items-center p-4">
