@@ -18,7 +18,7 @@ const providerImage = [
 function SigninButton({ provider }: any) {
 
   const { providerName, image } = providerImage.filter(
-    (p) => p.providerName === provider.name.toLowerCase()
+    (p) => p.providerName === provider?.name?.toLocaleLowerCase()
   )[0];
 
   return (

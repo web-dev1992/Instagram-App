@@ -9,6 +9,7 @@ interface ISigninProps {
 
 export default async function Signin() {
   const providers = await getProviders();
+  console.log('providers=>',providers)
   return (
     <>
       <Header />

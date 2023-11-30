@@ -6,7 +6,7 @@ import {
   MagnifyingGlassIcon,
   PlusCircleIcon,
 } from "@heroicons/react/24/outline";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 import { HomeIcon } from "@heroicons/react/24/solid";
 import { useSession, signIn, signOut } from "next-auth/react";
