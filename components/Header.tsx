@@ -6,6 +6,8 @@ import {
   MagnifyingGlassIcon,
   PlusCircleIcon,
 } from "@heroicons/react/24/outline";
+import { useRouter } from "next/router";
+
 import { HomeIcon } from "@heroicons/react/24/solid";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useRecoilState } from "recoil";
@@ -14,8 +16,9 @@ interface IHeaderProps {}
 
 export const Header: FC<IHeaderProps> = (props) => {
   const { data: session } = useSession();
-  console.log("session====>",session);
-  const [open, setOpen]=useRecoilState(modalState);
+  const router = useRouter();
+  console.log("session====>", session);
+  const [open, setOpen] = useRecoilState(modalState);
   return (
     <div className="bg-white sticky border-b shadow-sm z-30 top-0">
       <div className="flex content-center items-center justify-between max-w-6xl mx-4 xl:m-auto ">
@@ -27,6 +30,7 @@ export const Header: FC<IHeaderProps> = (props) => {
             height={200}
             alt="Instagram Logo"
             className="object-contain"
+            onClick={() => router.push("/")}
           />
         </div>
         <div className="cursor-pointer h-24 w-10 relative  lg:hidden flex items-center contect-center">
@@ -51,12 +55,17 @@ export const Header: FC<IHeaderProps> = (props) => {
         </div>
         {/* right part */}
         <div className="flex space-x-4 items-center ">
-          <HomeIcon className="hidden md:inline-flex h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
+          <HomeIcon
+            onClick={() => router.push("/")}
+            className="hidden md:inline-flex h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out"
+          />
           {session ? (
             <>
               {" "}
-              <PlusCircleIcon  onClick={()=>setOpen(true)}
-              className="h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
+              <PlusCircleIcon
+                onClick={() => setOpen(true)}
+                className="h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out"
+              />
               <Image
                 onClick={() => signOut()}
                 src={session?.user?.image ?? ""}
