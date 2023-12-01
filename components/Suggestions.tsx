@@ -1,6 +1,7 @@
 "use client";
 
 import { FC, useEffect, useState } from "react";
+import Image from "next/image";
 import minifaker from "minifaker";
 import "minifaker/locales/en";
 interface ISuggestionsProps {}
@@ -29,10 +30,15 @@ export const Suggestions: FC<ISuggestionsProps> = (props) => {
         <button className="text-gray-600 font-semibold ">See All</button>
       </div>
       {suggestions.map((suggestion: suggestion) => (
-        <div className="flex items-center justify-between mt-3 ">
-          <img
+        <div
+          className="flex items-center justify-between mt-3 "
+          key={suggestion.id}
+        >
+          <Image
             src={suggestion.image}
             alt={suggestion.username}
+            width={100}
+            height={100}
             className="h-10 rounded-full border p-[2px] "
           />
           <div className="flex-1 ml-4  ">

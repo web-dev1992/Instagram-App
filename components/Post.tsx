@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import type { FormEvent } from "react";
-import type { QueryDocumentSnapshot,DocumentData} from 'firebase/firestore'
+import type { QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
 import {
   EllipsisHorizontalIcon,
   HeartIcon,
@@ -80,7 +80,6 @@ export const Post: FC<IPostProps> = ({
         username: session?.user?.username,
       });
     }
-   
   }
   async function sendComment(event: FormEvent) {
     event.preventDefault();
@@ -136,6 +135,7 @@ export const Post: FC<IPostProps> = ({
       {/* Post Comments section */}
 
       <p className="p-5 truncate">
+        {likes.length > 0 && <p className="font-bold mb-1 "> {likes.length} likes</p>}
         <span className="font-bold mr-2 ">{username}</span>
         {caption}
       </p>
