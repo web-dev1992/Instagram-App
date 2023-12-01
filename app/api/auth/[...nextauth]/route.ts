@@ -11,6 +11,7 @@ const handler = NextAuth({
     }),
     // ...add more providers here
   ],
+  secret: process.env.SECRET as string,
   pages: {
     signIn: "/auth/signin",
   },
