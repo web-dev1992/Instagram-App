@@ -3,21 +3,27 @@ import { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import type { FormEvent } from "react";
+import type { QueryDocumentSnapshot,DocumentData} from 'firebase/firestore'
 import {
   EllipsisHorizontalIcon,
   HeartIcon,
+  HeartIcon as FilledHeartIcon,
   ChatBubbleOvalLeftIcon,
   BookmarkIcon,
   FaceSmileIcon,
 } from "@heroicons/react/24/outline";
+
 import Moment from "react-moment";
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   onSnapshot,
   orderBy,
   query,
   serverTimestamp,
+  setDoc,
 } from "firebase/firestore";
 import { db, storage } from "@/firebase";
 interface IPostProps {
@@ -38,7 +44,10 @@ export const Post: FC<IPostProps> = ({
   const { data: session } = useSession();
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState<any>([]);
-
+  const [likes, setLikes] = useState<
+    QueryDocumentSnapshot<DocumentData, DocumentData>[]
+  >([]);
+  const [hasLiked, setHasLiked] = useState<boolean>(false);
   useEffect(() => {
     const unsubscribe = onSnapshot(
       query(
@@ -50,6 +59,29 @@ export const Post: FC<IPostProps> = ({
       }
     );
   }, []);
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      collection(db, "posts", "_id", "likes"),
+      (snapshot) => setLikes(snapshot.docs)
+    );
+  }, []);
+  useEffect(() => {
+    setHasLiked(
+      likes.findIndex((like) => like.data()._id === session?.user?.uid) > -1
+    );
+  }, [likes, session?.user?.uid]);
+  async function likePost() {
+    if (hasLiked) {
+      await deleteDoc(
+        doc(db, "posts", "_id", "likes", `${session?.user?.uid}`)
+      );
+    } else {
+      await setDoc(doc(db, "posts", "_id", "likes", `${session?.user?.uid}`), {
+        username: session?.user?.username,
+      });
+    }
+   
+  }
   async function sendComment(event: FormEvent) {
     event.preventDefault();
     const commentToSend = comment;
@@ -86,7 +118,15 @@ export const Post: FC<IPostProps> = ({
       {session && (
         <div className="flex justify-between px-4 pt-4 ">
           <div className="flex space-x-4 ">
-            <HeartIcon className="btn" />
+            {hasLiked ? (
+              <FilledHeartIcon
+                onClick={likePost}
+                className="btn text-red-500 "
+              />
+            ) : (
+              <HeartIcon onClick={likePost} className="btn" />
+            )}
+
             <ChatBubbleOvalLeftIcon className="btn" />
           </div>
           <BookmarkIcon className="btn" />
