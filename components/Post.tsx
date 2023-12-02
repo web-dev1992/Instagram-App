@@ -51,7 +51,7 @@ export const Post: FC<IPostProps> = ({
   useEffect(() => {
     const unsubscribe = onSnapshot(
       query(
-        collection(db, "posts", "_id", "comments"),
+        collection(db, "posts", "id", "comments"),
         orderBy("timestamp", "desc")
       ),
       (snapshot) => {
@@ -61,22 +61,22 @@ export const Post: FC<IPostProps> = ({
   }, []);
   useEffect(() => {
     const unsubscribe = onSnapshot(
-      collection(db, "posts", "_id", "likes"),
+      collection(db, "posts", "id", "likes"),
       (snapshot) => setLikes(snapshot.docs)
     );
   }, []);
   useEffect(() => {
     setHasLiked(
-      likes.findIndex((like) => like.data()._id === session?.user?.uid) > -1
+      likes.findIndex((like) => like.data().id === session?.user?.uid) > -1
     );
   }, [likes, session?.user?.uid]);
   async function likePost() {
     if (hasLiked) {
       await deleteDoc(
-        doc(db, "posts", "_id", "likes", `${session?.user?.uid}`)
+        doc(db, "posts", "id", "likes", `${session?.user?.uid}`)
       );
     } else {
-      await setDoc(doc(db, "posts", "_id", "likes", `${session?.user?.uid}`), {
+      await setDoc(doc(db, "posts", "id", "likes", `${session?.user?.uid}`), {
         username: session?.user?.username,
       });
     }
@@ -85,7 +85,7 @@ export const Post: FC<IPostProps> = ({
     event.preventDefault();
     const commentToSend = comment;
     setComment("");
-    await addDoc(collection(db, "posts", "_id", "comments"), {
+    await addDoc(collection(db, "posts", "id", "comments"), {
       comment: commentToSend,
       username: session?.user?.username,
       userImage: session?.user?.image,
@@ -144,7 +144,7 @@ export const Post: FC<IPostProps> = ({
           {comments.map((comment) => (
             <div
               className="flex items-center space-x-2 mb-2"
-              key={comment.data()._id}
+              key={comment.data().id}
             >
               <Image
                 src={comment.data().userImage}

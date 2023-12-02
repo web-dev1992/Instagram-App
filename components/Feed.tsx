@@ -1,5 +1,4 @@
-
-'use client'
+"use client";
 
 import { FC } from "react";
 import { Stories } from "./Stories";
@@ -30,9 +29,10 @@ export const Feed: FC<IFeedProps> = (props) => {
       <section className="md:col-span-1 hidden md:inline-grid">
         <div className="fixed w-[380px]  ">
           {/* Mini Profile */}
-          <MiniProfile />
+          {session && <MiniProfile />}
+
           {/* Suggestions */}
-          <Suggestions />
+          {/* <Suggestions /> */}
         </div>
       </section>
     </main>

@@ -19,7 +19,10 @@ export const MiniProfile: FC<IMiniProfileProps> = (props) => {
         <h2 className="font-bold ">{session?.user?.username ?? ""}</h2>
         <h3 className="text-sm text-gray-400 ">Welcomt to instagram</h3>
       </div>
-      <button className="font-semibold text-blue-400 text-sm" onClick={()=>signOut}>
+      <button
+        className="font-semibold text-blue-400 text-sm"
+        onClick={() => signOut}
+      >
         Sign out
       </button>
     </div>

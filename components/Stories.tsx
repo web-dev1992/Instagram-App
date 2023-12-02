@@ -13,7 +13,7 @@ interface userStory {
   username: string;
 }
 export const Stories: FC<IStoriesProps> = (props) => {
-  const [storyUsers, setStoryUsers] = useState([]);
+  const [storyUsers, setStoryUsers] = useState<userStory[]>([]);
   const { data: session } = useSession();
   useEffect(() => {
     const storyUsers = minifaker.array(20, (i: number) => ({
@@ -23,12 +23,14 @@ export const Stories: FC<IStoriesProps> = (props) => {
     }));
     setStoryUsers(storyUsers);
   }, []);
+
+  console.log("storyUsers=====>", storyUsers);
   return (
     <div className="flex space-x-2 p-6 bg-white mt-8 border border-gray-200 overflow-x-scroll rounded-sm scrollbar-w-0 scrollbar-none">
       {session && (
         <Story
           img={session?.user?.image ?? ""}
-          username={session.user?.username}
+          username={session.user?.username ?? ""}
           isUser={true}
         />
       )}
@@ -36,8 +38,8 @@ export const Stories: FC<IStoriesProps> = (props) => {
       {storyUsers.map((user: userStory) => (
         <Story
           key={user.id}
-          username={user.username}
-          img={user.img}
+          username={user.username ?? ""}
+          img={user.img ?? ""}
           isUser={false}
         />
       ))}

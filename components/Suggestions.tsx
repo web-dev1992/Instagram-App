@@ -12,7 +12,7 @@ interface suggestion {
   image: string;
 }
 export const Suggestions: FC<ISuggestionsProps> = (props) => {
-  const [suggestions, setSuggestions] = useState([]);
+  const [suggestions, setSuggestions] = useState<suggestion[]>([]);
 
   useEffect(() => {
     const suggestions = minifaker.array(5, (i: number) => ({

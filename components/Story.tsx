@@ -12,7 +12,7 @@ export const Story: FC<IStoryProps> = ({ img, username, isUser = false }) => {
   return (
     <div className="relative group cursor-pointer">
       <Image
-        src={img}
+        src={img ?? ""}
         width={100}
         height={100}
         alt={username}

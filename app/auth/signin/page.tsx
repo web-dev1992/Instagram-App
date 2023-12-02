@@ -33,7 +33,7 @@ export default async function Signin() {
           </div>
         </div>
         <div className="">
-          {Object.values(providers).map((provider) => (
+          {Object.values(providers ?? {}).map((provider) => (
             <div className="flex flex-col items-center " key={provider.name}>
               <Image
                 src="/images/Instagram.png"
