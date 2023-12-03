@@ -12,11 +12,11 @@ export const Story: FC<IStoryProps> = ({ img, username, isUser = false }) => {
   return (
     <div className="relative group cursor-pointer">
       <Image
-        src={img ?? ""}
+        src={img}
         width={100}
         height={100}
         alt={username}
-        className="h-14 rounded-full border-2 border-red-500 p-[1.5px] group-hover:scale-110 transition-transform duration-200 ease-out"
+        className="h-12 w-12 rounded-full border-2 border-red-500 p-[1.5px] group-hover:scale-110 transition-transform duration-200 ease-out"
       />
       {isUser && (
         <PlusCircleIcon className="h-6 absolute top-4 left-4 text-white" />

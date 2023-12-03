@@ -12,8 +12,10 @@ export const MiniProfile: FC<IMiniProfileProps> = (props) => {
     <div className="flex items-center justify-between mt-14 ml-10">
       <Image
         src={session?.user?.image ?? ""}
+        width={100}
+        height={100}
         alt="user-image"
-        className="h-16 rounded-full cursor-pointer border p-[2px]  "
+        className="h-14 w-14 rounded-full cursor-pointer border p-[2px]  "
       />
       <div className="flex-1 ml-4 ">
         <h2 className="font-bold ">{session?.user?.username ?? ""}</h2>

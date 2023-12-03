@@ -26,15 +26,15 @@ export const Feed: FC<IFeedProps> = (props) => {
         {/* Posts section */}
         <Posts />
       </section>
-      <section className="md:col-span-1 hidden md:inline-grid">
+     {session && <section className="md:col-span-1 hidden md:inline-grid">
         <div className="fixed w-[380px]  ">
           {/* Mini Profile */}
-          {session && <MiniProfile />}
+           <MiniProfile />
 
           {/* Suggestions */}
-          {/* <Suggestions /> */}
+          <Suggestions />
         </div>
-      </section>
+      </section>}
     </main>
   );
 };

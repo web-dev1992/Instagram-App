@@ -39,8 +39,9 @@ export const Suggestions: FC<ISuggestionsProps> = (props) => {
             alt={suggestion.username}
             width={100}
             height={100}
-            className="h-10 rounded-full border p-[2px] "
+            className="h-12 w-12 rounded-full border p-[2px] "
           />
+
           <div className="flex-1 ml-4  ">
             <h2 className="font-semibold text-sm ">{suggestion.username}</h2>
             <h3 className="text-gray-400 text-sm truncate w-[230px]">

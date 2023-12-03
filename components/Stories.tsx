@@ -40,7 +40,6 @@ export const Stories: FC<IStoriesProps> = (props) => {
           key={user.id}
           username={user.username ?? ""}
           img={user.img ?? ""}
-          isUser={false}
         />
       ))}
     </div>
