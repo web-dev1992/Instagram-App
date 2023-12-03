@@ -72,9 +72,7 @@ export const Post: FC<IPostProps> = ({
   }, [likes, session?.user?.uid]);
   async function likePost() {
     if (hasLiked) {
-      await deleteDoc(
-        doc(db, "posts", "id", "likes", `${session?.user?.uid}`)
-      );
+      await deleteDoc(doc(db, "posts", "id", "likes", `${session?.user?.uid}`));
     } else {
       await setDoc(doc(db, "posts", "id", "likes", `${session?.user?.uid}`), {
         username: session?.user?.username,
@@ -135,13 +133,15 @@ export const Post: FC<IPostProps> = ({
       {/* Post Comments section */}
 
       <p className="p-5 truncate">
-        {likes.length > 0 && <p className="font-bold mb-1 "> {likes.length} likes</p>}
+        {likes.length > 0 && (
+          <p className="font-bold mb-1 "> {likes.length} likes</p>
+        )}
         <span className="font-bold mr-2 ">{username}</span>
         {caption}
       </p>
       {comments.length > 0 && (
         <div className="mx-10 max-h-24 overflow-y-scroll scrollbar-none">
-          {comments.map((comment) => (
+          {comments.map((comment: any) => (
             <div
               className="flex items-center space-x-2 mb-2"
               key={comment.data().id}
