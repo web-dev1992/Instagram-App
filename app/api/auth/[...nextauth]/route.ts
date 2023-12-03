@@ -11,17 +11,20 @@ const handler = NextAuth({
     }),
     // ...add more providers here
   ],
-  secret: process.env.SECRET as string, 
+  secret: process.env.NEXTAUTH_SECRET as string,
   pages: {
     signIn: "/auth/signin",
   },
-  callbacks:{
-    async session({ session, token, user } ) {
-      session.user.username=session.user.name.split(" ").join("").toLocaleLowerCase();
-      session.user.uid=token.sub ?? "";
+  callbacks: {
+    async session({ session, token, user }) {
+      session.user.username = session.user.name
+        .split(" ")
+        .join("")
+        .toLocaleLowerCase();
+      session.user.uid = token.sub ?? "";
       return session;
-
-  }
-}});
+    },
+  },
+});
 
 export { handler as GET, handler as POST };
