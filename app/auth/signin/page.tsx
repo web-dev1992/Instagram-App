@@ -3,9 +3,7 @@ import { getProviders } from "next-auth/react";
 import { Header } from "@/components/Header";
 import Image from "next/image";
 import SigninButton from "@/components/SigninButton";
-interface ISigninProps {
-  providers: any;
-}
+
 
 export default async function Signin() {
   const providers = await getProviders();
@@ -28,13 +26,11 @@ export default async function Signin() {
               alt="login"
               width={210}
               height={538}
-              // className="object-contain w-auto h-auto"
             />
           </div>
         </div>
         <div className="">
-          {Object.values(providers ?? {}).map((provider) => (
-            <div className="flex flex-col items-center " key={provider.name}>
+            <div className="flex flex-col items-center " >
               <Image
                 src="/images/Instagram.png"
                 width={100}
@@ -45,9 +41,10 @@ export default async function Signin() {
               <p className="text-sm italic my-10 text-center ">
                 This app is created for learning purposes
               </p>
-              <SigninButton provider={provider} />
-            </div>
-          ))}
+          {Object.values(providers ?? {}).map((provider) => (
+              <SigninButton provider={provider} key={provider.name} />
+              ))}
+              </div>
         </div>
       </div>
     </>
