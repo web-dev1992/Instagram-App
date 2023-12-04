@@ -11,7 +11,7 @@ const handler = NextAuth({
     }),
     // ...add more providers here
   ],
-  secret: process.env.NEXTAUTH_SECRET as string,
+  secret: "E5JIwhIlPaYbK0uJPSGjYSvmp7Y8Dz/cc7JzJ66jBsQ=",
   pages: {
     signIn: "/auth/signin",
   },
