@@ -21,7 +21,7 @@ interface IUploadModalProps {}
 export const UploadModal: FC<IUploadModalProps> = (props) => {
   const { data: session } = useSession();
   const [open, setOpen] = useRecoilState(modalState);
-  const [selectedfile, setSelectedFile] = useState<any>(null);
+  const [selectedFile, setSelectedFile] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const filePickerRef = useRef<HTMLInputElement>(null);
   const captionRef = useRef<HTMLInputElement>(null);
@@ -29,7 +29,7 @@ export const UploadModal: FC<IUploadModalProps> = (props) => {
 
 
   function addImageToPost(event: ChangeEvent<HTMLInputElement>) {
-    const reader = new FileReader(); //a built in JS onject that reads the file selected by file input
+    const reader = new FileReader(); //a built in JS object that reads the file selected by file input
     // const input = event.target as HTMLInputElement;
     if (event.target.files) {
       reader.readAsDataURL(event.target.files[0]);
@@ -44,11 +44,11 @@ export const UploadModal: FC<IUploadModalProps> = (props) => {
     const docRef = await addDoc(collection(db, "posts"), {
       caption: captionRef?.current?.value,
       username: session?.user?.username,
-      profileImage: session?.user.image,
+      profileImage: session?.user.image ?? "/images/no-user-image.png",
       timestamp: serverTimestamp(),
     });
     const imageRef = ref(storage, `posts/${docRef.id}/image`);
-    await uploadString(imageRef, selectedfile, "data_url").then(
+    await uploadString(imageRef, selectedFile, "data_url").then(
       async (snapshot) => {
         const downloadURL = await getDownloadURL(imageRef);
         await updateDoc(doc(db, "posts", docRef.id), {
@@ -72,9 +72,9 @@ export const UploadModal: FC<IUploadModalProps> = (props) => {
           }}
         >
           <div className="flex flex-col justify-center items-center h-[100%]">
-            {selectedfile ? (
+            {selectedFile ? (
               <Image
-                src={selectedfile}
+                src={selectedFile}
                 width={400}
                 height={300}
                 alt="post image"
@@ -102,7 +102,7 @@ export const UploadModal: FC<IUploadModalProps> = (props) => {
               ref={captionRef}
             />
             <button
-              disabled={!selectedfile || loading}
+              disabled={!selectedFile || loading}
               onClick={uploadPost}
               className="w-full bg-red-600 text-white p-2 shadow-md hover:brightness-125 disabled:bg-gray-200 disabled:cursor-not-allowed disabled:hover:brightness-100"
             >

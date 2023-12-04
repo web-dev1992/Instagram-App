@@ -29,7 +29,7 @@ export const Stories: FC<IStoriesProps> = (props) => {
     <div className="flex space-x-2 p-6 bg-white mt-8 border border-gray-200 overflow-x-scroll rounded-sm scrollbar-w-0 scrollbar-none">
       {session && (
         <Story
-          img={session?.user?.image ?? ""}
+          img={session?.user?.image ?? "/images/no-user-image.png"}
           username={session.user?.username ?? ""}
           isUser={true}
         />
@@ -38,7 +38,7 @@ export const Stories: FC<IStoriesProps> = (props) => {
       {storyUsers.map((user: userStory) => (
         <Story
           key={user.id}
-          username={user.username ?? ""}
+          username={user.username ?? "/images/no-user-image.png"}
           img={user.img ?? ""}
         />
       ))}
