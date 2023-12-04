@@ -11,7 +11,7 @@ export const MiniProfile: FC<IMiniProfileProps> = (props) => {
   return (
     <div className="flex items-center justify-between mt-14 ml-10">
       <Image
-        src={session?.user?.image ?? ""}
+        src={session?.user?.image ?? "/images/no-user-image.png"}
         width={100}
         height={100}
         alt="user-image"
@@ -23,7 +23,7 @@ export const MiniProfile: FC<IMiniProfileProps> = (props) => {
       </div>
       <button
         className="font-semibold text-blue-400 text-sm"
-        onClick={() => signOut}
+        onClick={() => signOut()}
       >
         Sign out
       </button>

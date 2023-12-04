@@ -68,9 +68,11 @@ export const Header: FC<IHeaderProps> = (props) => {
               />
               <Image
                 onClick={() => signOut()}
-                src={session?.user?.image ?? ""}
+                src={session?.user?.image ?? "/images/no-user-image.png"}
                 alt="user-image"
-                className="h-10 rounded-full cursor-pointer "
+                className="h-10 w-10 rounded-full cursor-pointer "
+                width={100}
+                height={100}
               />
             </>
           ) : (

@@ -23,8 +23,8 @@ export const UploadModal: FC<IUploadModalProps> = (props) => {
   const [open, setOpen] = useRecoilState(modalState);
   const [selectedfile, setSelectedFile] = useState<any>(null);
   const [loading, setLoading] = useState(false);
-  const filePickerRef = useRef<any>(null);
-  const captionRef = useRef<any>(null);
+  const filePickerRef = useRef<HTMLInputElement>(null);
+  const captionRef = useRef<HTMLInputElement>(null);
 
 
 
@@ -42,7 +42,7 @@ export const UploadModal: FC<IUploadModalProps> = (props) => {
     if (loading) return;
     setLoading(true);
     const docRef = await addDoc(collection(db, "posts"), {
-      caption: captionRef.current.value,
+      caption: captionRef?.current?.value,
       username: session?.user?.username,
       profileImage: session?.user.image,
       timestamp: serverTimestamp(),
