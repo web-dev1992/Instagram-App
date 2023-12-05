@@ -17,8 +17,7 @@ interface IHeaderProps {}
 export const Header: FC<IHeaderProps> = (props) => {
   const { data: session } = useSession();
   const router = useRouter();
-  console.log("session on header====>", session);
-  const [open, setOpen] = useRecoilState(modalState);
+    const [open, setOpen] = useRecoilState(modalState);
   return (
     <div className="bg-white sticky border-b shadow-sm z-30 top-0">
       <div className="flex content-center items-center justify-between max-w-6xl mx-4 xl:m-auto ">
