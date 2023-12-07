@@ -166,6 +166,7 @@ export const Post: FC<IPostProps> = ({
           <FaceSmileIcon className="h-7 " />
           <input
             type="text"
+            name="comment"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
             placeholder="Enter Your Comment..."
