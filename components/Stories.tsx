@@ -37,8 +37,8 @@ export const Stories: FC<IStoriesProps> = (props) => {
       {storyUsers.map((user: userStory) => (
         <Story
           key={user.id}
-          username={user.username ?? "/images/no-user-image.png"}
-          img={user.img ?? ""}
+          username={user.username ?? ""}
+          img={user.img ?? "/images/no-user-image.png"}
         />
       ))}
     </div>
