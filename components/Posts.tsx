@@ -33,9 +33,9 @@ export const Posts: FC<IPostsProps> = (props) => {
     <div>
       {posts.map((post) => (
         <Post
-          key={post.data().id}
+          key={post.id}
           username={post.data().username}
-          userimage={post.data().profileImg}
+          userimage={post.data().profileImage}
           image={post.data().image}
           caption={post.data().caption}
           id={post.data().id}

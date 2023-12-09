@@ -25,7 +25,7 @@ import {
   serverTimestamp,
   setDoc,
 } from "firebase/firestore";
-import { db, storage } from "@/firebase";
+import { db } from "@/firebase";
 interface IPostProps {
   id: number;
   image: string;
@@ -48,48 +48,74 @@ export const Post: FC<IPostProps> = ({
     QueryDocumentSnapshot<DocumentData, DocumentData>[]
   >([]);
   const [hasLiked, setHasLiked] = useState<boolean>(false);
+
+
+
+
   useEffect(() => {
     const unsubscribe = onSnapshot(
       query(
-        collection(db, "posts", "id", "comments"),
+        collection(db, "posts", `${id}`, "comments"),
         orderBy("timestamp", "desc")
       ),
       (snapshot) => {
         setComments(snapshot.docs);
       }
     );
-  }, []);
+  }, [id]);
+
+
+
+
   useEffect(() => {
     const unsubscribe = onSnapshot(
-      collection(db, "posts", "id", "likes"),
+      collection(db, "posts", `${id}`, "likes"),
       (snapshot) => setLikes(snapshot.docs)
     );
-  }, []);
+  }, [id]);
+
+
+
+
   useEffect(() => {
     setHasLiked(
-      likes.findIndex((like) => like.data().id === session?.user?.uid) > -1
+      likes.findIndex((like) => like.id === session?.user?.uid) > -1
     );
   }, [likes, session?.user?.uid]);
+
+
+
+
   async function likePost() {
     if (hasLiked) {
-      await deleteDoc(doc(db, "posts", "id", "likes", `${session?.user?.uid}`));
+      await deleteDoc(
+        doc(db, "posts", `${id}`, "likes", `${session?.user?.uid}`)
+      );
     } else {
-      await setDoc(doc(db, "posts", "id", "likes", `${session?.user?.uid}`), {
-        username: session?.user?.username,
-      });
+      await setDoc(
+        doc(db, "posts", `${id}`, "likes", `${session?.user?.uid}`),
+        {
+          username: session?.user?.username,
+        }
+      );
     }
   }
+
+
   async function sendComment(event: FormEvent) {
     event.preventDefault();
     const commentToSend = comment;
     setComment("");
-    await addDoc(collection(db, "posts", "id", "comments"), {
+    await addDoc(collection(db, "posts", `${id}`, "comments"), {
       comment: commentToSend,
       username: session?.user?.username,
       userImage: session?.user?.image,
       timestamp: serverTimestamp(),
     });
   }
+
+
+
   return (
     <div className="bg-white my-7 border rounded-md">
       {/* Post Header section */}
