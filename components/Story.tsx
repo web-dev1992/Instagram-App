@@ -1,7 +1,6 @@
 import { FC } from "react";
 import Image from "next/image";
-import { PlusIcon } from "@heroicons/react/24/solid";
-
+import { PlusCircleIcon } from "@heroicons/react/24/solid";
 interface IStoryProps {
   img: string;
   username: string;
@@ -19,7 +18,7 @@ export const Story: FC<IStoryProps> = ({ img, username, isUser = false }) => {
         className="h-12 w-12 rounded-full border-2 border-red-500 p-[1.5px] group-hover:scale-110 transition-transform duration-200 ease-out"
       />
       {isUser && (
-        <PlusIcon className="h-6 w-6 absolute top-[12px] left-[12px] text-white border border-gray-700" />
+        <PlusCircleIcon className="h-4 w-4 bg-white text-blue-500 rounded-full absolute top-8 left-8" />
       )}
       <p className="text-xs w-14 truncate">{username}</p>
     </div>
