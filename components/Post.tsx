@@ -116,7 +116,7 @@ export const Post: FC<IPostProps> = ({
       <Image
         src={image}
         alt={image}
-        className="object-contain w-full aspect-video"
+        className="object-cover w-full aspect-video"
         width={380}
         height={200}
       />
