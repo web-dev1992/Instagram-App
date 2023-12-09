@@ -149,7 +149,7 @@ export const Post: FC<IPostProps> = ({
         {caption}
       </p>
       {comments.length > 0 && (
-        <div className="mx-10 max-h-24 overflow-y-scroll scrollbar-none">
+        <div className="mx-10 max-h-24 overflow-y-scroll scrollbar-w-0 scrollbar-none">
           {comments.map((comment: any) => (
             <div
               className="flex items-center space-x-2 mb-2"
