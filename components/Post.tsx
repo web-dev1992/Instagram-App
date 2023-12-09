@@ -49,9 +49,6 @@ export const Post: FC<IPostProps> = ({
   >([]);
   const [hasLiked, setHasLiked] = useState<boolean>(false);
 
-
-
-
   useEffect(() => {
     const unsubscribe = onSnapshot(
       query(
@@ -64,9 +61,6 @@ export const Post: FC<IPostProps> = ({
     );
   }, [id]);
 
-
-
-
   useEffect(() => {
     const unsubscribe = onSnapshot(
       collection(db, "posts", `${id}`, "likes"),
@@ -74,17 +68,9 @@ export const Post: FC<IPostProps> = ({
     );
   }, [id]);
 
-
-
-
   useEffect(() => {
-    setHasLiked(
-      likes.findIndex((like) => like.id === session?.user?.uid) > -1
-    );
+    setHasLiked(likes.findIndex((like) => like.id === session?.user?.uid) > -1);
   }, [likes, session?.user?.uid]);
-
-
-
 
   async function likePost() {
     if (hasLiked) {
@@ -101,7 +87,6 @@ export const Post: FC<IPostProps> = ({
     }
   }
 
-
   async function sendComment(event: FormEvent) {
     event.preventDefault();
     const commentToSend = comment;
@@ -113,8 +98,6 @@ export const Post: FC<IPostProps> = ({
       timestamp: serverTimestamp(),
     });
   }
-
-
 
   return (
     <div className="bg-white my-7 border rounded-md">
@@ -135,7 +118,8 @@ export const Post: FC<IPostProps> = ({
         src={image}
         alt={image}
         className="object-cover w-full"
-        fill={true}
+        width={400}
+        height={300}
       />
       {/* Post buttons section */}
       {session && (
