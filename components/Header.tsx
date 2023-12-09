@@ -42,7 +42,7 @@ export const Header: FC<IHeaderProps> = (props) => {
           />
         </div>
         {/* middle part */}
-        <div className="relative mt-1">
+        <div className="relative mt-1 ml-2">
           <div className="absolute top-2 left-2">
             <MagnifyingGlassIcon className="h-5 text-gray-500" />
           </div>
@@ -79,6 +79,7 @@ export const Header: FC<IHeaderProps> = (props) => {
               onClick={() => {
                 signIn();
               }}
+              className="text-sm md:text-base"
             >
               Sign in
             </button>
