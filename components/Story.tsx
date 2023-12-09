@@ -19,7 +19,7 @@ export const Story: FC<IStoryProps> = ({ img, username, isUser = false }) => {
         className="h-12 w-12 rounded-full border-2 border-red-500 p-[1.5px] group-hover:scale-110 transition-transform duration-200 ease-out"
       />
       {isUser && (
-        <PlusIcon className="h-6 w-6 absolute top-[14px] left-[14px] text-black" />
+        <PlusIcon className="h-6 w-6 absolute top-[12px] left-[12px] text-white border border-gray-700" />
       )}
       <p className="text-xs w-14 truncate">{username}</p>
     </div>

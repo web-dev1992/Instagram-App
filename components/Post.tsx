@@ -7,12 +7,11 @@ import type { QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
 import {
   EllipsisHorizontalIcon,
   HeartIcon,
-  HeartIcon as FilledHeartIcon,
   ChatBubbleOvalLeftIcon,
   BookmarkIcon,
   FaceSmileIcon,
 } from "@heroicons/react/24/outline";
-
+import { HeartIcon as FilledHeartIcon } from "@heroicons/react/24/solid";
 import Moment from "react-moment";
 import {
   addDoc,
