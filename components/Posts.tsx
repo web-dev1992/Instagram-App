@@ -29,6 +29,7 @@ export const Posts: FC<IPostsProps> = (props) => {
     );
     return unsubscribe;
   }, []);
+  console.log(posts);
   return (
     <div>
       {posts.map((post) => (
@@ -38,7 +39,7 @@ export const Posts: FC<IPostsProps> = (props) => {
           userimage={post.data().profileImage}
           image={post.data().image}
           caption={post.data().caption}
-          id={post.data().id}
+          id={post.id}
         />
       ))}
     </div>

@@ -26,7 +26,7 @@ import {
 } from "firebase/firestore";
 import { db } from "@/firebase";
 interface IPostProps {
-  id: number;
+  id: string;
   image: string;
   username: string;
   userimage: string;
