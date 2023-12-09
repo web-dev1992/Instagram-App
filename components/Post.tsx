@@ -117,9 +117,9 @@ export const Post: FC<IPostProps> = ({
       <Image
         src={image}
         alt={image}
-        className="object-cover w-full"
-        width={400}
-        height={300}
+        className="object-cover w-full aspect-video"
+        width={380}
+        height={200}
       />
       {/* Post buttons section */}
       {session && (
