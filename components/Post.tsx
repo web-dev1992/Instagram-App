@@ -109,7 +109,7 @@ export const Post: FC<IPostProps> = ({
     await addDoc(collection(db, "posts", `${id}`, "comments"), {
       comment: commentToSend,
       username: session?.user?.username,
-      userImage: session?.user?.image,
+      userImage: session?.user?.image ?? "/images/no-user-image.png",
       timestamp: serverTimestamp(),
     });
   }
